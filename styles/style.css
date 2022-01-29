@@ -20,7 +20,10 @@ body {
 
 }
 #wrapper {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #slider {
@@ -47,4 +50,18 @@ body {
 .active {
     animation: linear 0.2s fade;
     display: flex;
+}
+#dots {
+    display: flex;
+}
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border: 1px solid black;
+    margin: 5px;
+    border-radius: 50%;
+}
+.activeDot {
+    background-color: gray;
 }

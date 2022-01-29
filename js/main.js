@@ -3,8 +3,10 @@ let body = document.getElementsByTagName('body');
 let slides = SLIDER.querySelectorAll('.slider__list-item');
 let buttonLeft = SLIDER.querySelector('.left-btn');
 let buttonRight = SLIDER.querySelector('.right-btn');
+let dotsBox = document.querySelector('#dots');
 let slidesLength = slides.length;
-
+let dot = document.createElement('div')
+dot.className = 'dot';
 let currentIndex = 0;
 let startTouch = {
     x: null,
@@ -14,11 +16,28 @@ let endTouch = {
     x: null,
     y: null
 }
-console.log(slides, buttonLeft, buttonRight, slidesLength)
-buttonRight.onclick = () => {
-    moveRight()
-};
+
+for (let i = 0; i < slidesLength; i++) {
+    dotsBox.appendChild(document.createElement('button'));
+}
+dotsBox.childNodes.forEach(element => {
+    if (element.nodeName === 'BUTTON') {
+        element.className = 'dot';
+    }
+})
+let dots = document.querySelectorAll('.dot');
+
+function activateDot() {
+    dots.forEach(element => {
+        element.classList.remove('activeDot')
+    })
+    dots[currentIndex].classList.add('activeDot')
+}
+
+
+buttonRight.onclick = moveRight;
 buttonLeft.onclick = moveLeft;
+
 SLIDER.addEventListener('touchstart', (event) => {
     startTouch.x = event.touches[0].clientX;
     startTouch.y = event.touches[0].clientY;
@@ -47,9 +66,11 @@ function checkAction(event) {
 }
 
 changeBackground()
+activateDot()
 
 function changeBackground() {
     document.body.style.backgroundImage = `url(${slides[currentIndex].firstChild.currentSrc})`;
+
 }
 
 function moveRight() {
@@ -62,6 +83,7 @@ function moveRight() {
     clearActiveClass();
     addActiveClass(currentIndex);
     changeBackground()
+    activateDot()
 }
 
 function moveLeft() {
@@ -73,6 +95,7 @@ function moveLeft() {
     clearActiveClass();
     addActiveClass(currentIndex);
     changeBackground()
+    activateDot()
 }
 
 
