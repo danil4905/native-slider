@@ -16,15 +16,28 @@ let endTouch = {
     x: null,
     y: null
 }
+createDots()
 
-for (let i = 0; i < slidesLength; i++) {
-    dotsBox.appendChild(document.createElement('button'));
+
+function dotSelect(event) {
+    const id = event.target.getAttribute('data');
+    currentIndex = Number(id) - 1;
+    changeSlide()
 }
-dotsBox.childNodes.forEach(element => {
-    if (element.nodeName === 'BUTTON') {
-        element.className = 'dot';
+
+function createDots() {
+    for (let i = 0; i < slidesLength; i++) {
+        dotsBox.appendChild(document.createElement('button'));
     }
-})
+    dotsBox.childNodes.forEach((element, index) => {
+        if (element.nodeName === 'BUTTON') {
+            element.className = 'dot';
+            element.onclick = dotSelect
+            element.setAttribute('data', `${index}`)
+        }
+    })
+}
+
 let dots = document.querySelectorAll('.dot');
 
 function activateDot() {
@@ -70,7 +83,6 @@ activateDot()
 
 function changeBackground() {
     document.body.style.backgroundImage = `url(${slides[currentIndex].firstChild.currentSrc})`;
-
 }
 
 function moveRight() {
@@ -80,10 +92,7 @@ function moveRight() {
     } else {
         currentIndex = 0;
     }
-    clearActiveClass();
-    addActiveClass(currentIndex);
-    changeBackground()
-    activateDot()
+    changeSlide()
 }
 
 function moveLeft() {
@@ -92,10 +101,7 @@ function moveLeft() {
     } else {
         currentIndex = slidesLength - 1;
     }
-    clearActiveClass();
-    addActiveClass(currentIndex);
-    changeBackground()
-    activateDot()
+    changeSlide()
 }
 
 
@@ -111,4 +117,11 @@ function addActiveClass(current) {
             element.classList.add('active')
         }
     })
+}
+
+function changeSlide() {
+    clearActiveClass();
+    addActiveClass(currentIndex);
+    changeBackground()
+    activateDot()
 }

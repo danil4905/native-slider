@@ -1,6 +1,10 @@
 @keyframes fade {
-    from {opacity: 0}
-    to {opacity: 1}
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
 }
 
 * {
@@ -9,21 +13,31 @@
     text-decoration: none;
     list-style-type: none;
 }
+
 body {
     background-position: center;
     background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     animation: linear 0.2s fade;
-
-
 }
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+    background-color: gray;
+    z-index: -1;
+}
+
 #wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 #slider {
@@ -31,6 +45,7 @@ body {
     align-items: center;
     margin-top: 50px;
 }
+
 .slider-btn {
     background-color: #fff;
     width: 70px;
@@ -40,20 +55,25 @@ body {
     transition: 0.2s ease;
     margin: 15px;
 }
+
 .slider-btn:hover {
     background-color: gray;
 }
+
 .slider__list-item {
     display: none;
     border: 1px solid gray;
 }
+
 .active {
     animation: linear 0.2s fade;
     display: flex;
 }
+
 #dots {
     display: flex;
 }
+
 .dot {
     width: 10px;
     height: 10px;
@@ -61,7 +81,9 @@ body {
     border: 1px solid black;
     margin: 5px;
     border-radius: 50%;
+    cursor: pointer;
 }
+
 .activeDot {
     background-color: gray;
 }
